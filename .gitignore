@@ -219,3 +219,7 @@ __marimo__/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Private Project Logs
+LOG.md
+docs/LOG.md
