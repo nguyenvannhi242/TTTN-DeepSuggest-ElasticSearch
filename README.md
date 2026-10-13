@@ -12,30 +12,39 @@ Kiến trúc gồm:
 ## 🏗️ Cấu trúc Thư mục
 
 ```bash
-├── 📁 backend
+├── 📁 backend                   # FastAPI service
 │   ├── 📁 app
 │   │   ├── __init__.py
-│   │   ├── es_client.py
-│   │   └── main.py
+│   │   ├── es_client.py         # Client kết nối ES, kNN search & logic giá
+│   │   └── main.py              # Các API endpoints
 │   ├── Dockerfile
 │   └── requirements.txt
-├── 📁 data
+├── 📁 data                      # Dữ liệu sản phẩm và vector embedding
 │   ├── mock_products.json
 │   ├── mock_products_with_embedding.json
-│   └── raw_products.csv
-├── 📁 frontend
+│   ├── raw_products.xlsx
+│   └── raw_products_clean.xlsx
+├── 📁 docs                      # Tài liệu kỹ thuật chi tiết
+│   ├── LOG.md                   # Nhật ký dự án & luồng hoạt động
+│   └── PRICE_FILTERING_LOGIC.md # Tài liệu trích xuất giá bằng Regex
+├── 📁 frontend                  # Giao diện người dùng
 │   ├── index.html
 │   ├── style.css
 │   └── app.js
-├── 📁 scripts
+├── 📁 notebook-preprocess       # Notebooks phân tích & crawl dữ liệu thô
+│   ├── preprocess_for_all.ipynb
+│   ├── read_data.ipynb
+│   └── requirements.txt
+├── 📁 scripts                   # Pipeline xử lý dữ liệu offline
 │   ├── embed_to_json.py
 │   ├── evaluate_similarity.py
 │   ├── import_to_elasticsearch.py
 │   ├── preprocess_csv.py
 │   └── requirements.txt
+├── .env.example                 # File mẫu biến môi trường
 ├── .gitignore
-├── docker-compose.yml
-├── run_all.py
+├── docker-compose.yml           # Khởi chạy Elasticsearch, Kibana, Backend
+├── run_all.py                   # Script điều phối tự động toàn bộ quy trình
 └── README.md
 ```
 
@@ -208,18 +217,29 @@ python scripts/evaluate_similarity.py
 
 ---
 
-## 💡 Kiểm tra Nhanh
+## 💡 Kiểm tra Nhanh & Truy cập Dịch vụ
 
-* Kiểm tra Elasticsearch:
-  👉 [http://localhost:9200/_cat/indices?v](http://localhost:9200/_cat/indices?v)
+* **Elasticsearch Health:** 👉 [http://localhost:9200/_cat/indices?v](http://localhost:9200/_cat/indices?v)
+* **Backend API Docs (Swagger):** 👉 [http://localhost:8001/docs](http://localhost:8001/docs)
+* **Giao diện Web:** Mở trực tiếp file [frontend/index.html](frontend/index.html) trên trình duyệt (hoặc dùng Live Server / `python -m http.server 3000 --directory frontend`)
+* **Kibana UI:** 👉 [http://localhost:5601](http://localhost:5601)
 
-* Kiểm tra Backend (FastAPI docs):
-  👉 [http://localhost:8000/docs](http://localhost:8000/docs)
+---
 
-  **Truy cập:**
-    * **Trang web:** `http://localhost:5173/` (Hoặc mở file `frontend/index.html`)
-    * **Backend API Docs:** `http://localhost:8000/docs`
-    * **Kibana (Xem data):** `http://localhost:5601`
+## 📚 Tài Liệu Bổ Sung
+
+* 📋 [Nhật Ký & Luồng Hoạt Động Chi Tiết (docs/LOG.md)](docs/LOG.md)
+* 💰 [Logic Nhận Diện & Trích Xuất Bộ Lọc Giá (docs/PRICE_FILTERING_LOGIC.md)](docs/PRICE_FILTERING_LOGIC.md)
+
+---
+
+## 🛠️ Lệnh Tiện Ích
+
+Xóa sạch dữ liệu trong Elasticsearch để nạp lại từ đầu:
+```bash
+docker-compose exec elasticsearch curl -X DELETE "localhost:9200/products,click_logs"
+```
+
 ---
 
 ## 🎯 Kết luận
@@ -227,12 +247,8 @@ python scripts/evaluate_similarity.py
 Dự án minh họa quy trình **xây dựng hệ thống gợi ý sản phẩm dựa trên nội dung (Content-Based Recommendation)** gồm:
 
 1. Tiền xử lý dữ liệu
-2. Tính toán vector embedding
-3. Lưu & tìm kiếm bằng Elasticsearch
-4. Kết hợp Backend API + Frontend hiển thị kết quả
+2. Tính toán vector embedding offline
+3. Lưu trữ & tìm kiếm vector kNN bằng Elasticsearch
+4. Kết hợp Backend FastAPI + Frontend hiển thị kết quả
 
 > 🎯 Giúp hiểu trọn luồng triển khai thực tế của hệ thống gợi ý hiện đại.
-
-
-
-docker-compose exec elasticsearch curl -X DELETE "localhost:9200/products,click_logs"
