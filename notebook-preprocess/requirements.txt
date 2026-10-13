@@ -1,0 +1,8 @@
+# Minimal, clean requirements.txt for DS
+numpy\pandas
+matplotlib
+seaborn
+scikit-learn
+scipy
+jupyter
+notebook

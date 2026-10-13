@@ -1,0 +1,15 @@
+
+sentence-transformers
+
+numpy==1.26.4
+torch==2.3.0 
+
+
+elasticsearch==8.11.1
+python-dotenv
+tqdm
+pandas
+openpyxl 
+requests 
+setuptools<58
+#pip install ml_metrics

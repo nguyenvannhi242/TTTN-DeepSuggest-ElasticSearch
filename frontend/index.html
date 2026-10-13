@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ thống Tìm kiếm Thông minh</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="main-nav">
+        <div class="container">
+            <button id="nav-tab-app" class="nav-tab active" data-tab="app-content">
+                <i class="fas fa-search"></i> Sử dụng
+            </button>
+            <button id="nav-tab-doc" class="nav-tab" data-tab="doc-content">
+                <i class="fas fa-book-open"></i> Hướng dẫn & Kiến trúc
+            </button>
+        </div>
+    </nav>
+
+    <div id="app-content" class="tab-content active">
+        <header>
+            <div class="container header-content">
+                <h1>
+                    <a href="#" class="home-link" id="home-link-app" aria-label="Tải lại trang">
+                        <i class="fas fa-bolt"></i> Cửa hàng Điện tử
+                    </a>
+                </h1>
+                <form id="search-form">
+                    <select id="category-select" aria-label="Chọn loại sản phẩm">
+                        <option value="">-- Tất cả loại --</option>
+                    </select>
+                    <input type="search" id="search-input" placeholder="Tìm laptop, tai nghe..." aria-label="Nhập từ khóa tìm kiếm">
+                    <button type="submit" aria-label="Tìm kiếm"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+        </header>
+                
+
+        <main class="container">
+            <section id="keyword-results-section" aria-live="polite" style="display: none;">
+                <h2 id="keyword-results-title">Kết quả tìm kiếm</h2>
+                <div id="keyword-results-grid" class="product-grid"></div>
+                <p id="keyword-message" class="message"></p>
+                </section>
+
+            <section id="semantic-suggestions-section" style="display: none;">
+                <h2 id="semantic-title"><i class="fas fa-lightbulb"></i> Gợi ý liên quan</h2>
+                <div id="semantic-suggestions-grid" class="product-grid suggestions-grid"></div>
+                <p id="semantic-message" class="message"></p>
+            </section>
+
+            <section id="all-products-section">
+                <h2><i class="fas fa-th-large"></i> Khám phá Sản phẩm</h2>
+                <div id="product-grid" class="product-grid">
+                    <p class="message">Đang tải sản phẩm...</p>
+                </div>
+                <button id="load-more-products" class="load-more-btn" style="display: none;">Tải thêm</button>
+            </section>
+        </main>
+
+        <footer>
+            <div class="container"><p>&copy; 2025 - Demo Tốt nghiệp</p></div>
+        </footer>
+    </div>
+    <div id="doc-content" class="tab-content">
+        <header>
+            <div class="container header-content">
+                <h1><i class="fas fa-book-open"></i> Hướng dẫn & Kiến trúc hệ thống</h1>
+            </div>
+        </header>
+
+        <div class="container page-container">
+            <aside class="sidebar">
+                <h3>Thông tin dự án</h3>
+                <ul class="sidebar-nav">
+                    <li><a href="#doc-section-1"><i class="fas fa-code"></i> Source Code</a></li>
+                    <li><a href="#doc-section-2"><i class="fas fa-users"></i> Người thực hiện</a></li>
+                    <li><a href="#doc-section-3"><i class="fas fa-tasks"></i> Cách sử dụng</a></li>
+                    <li><a href="#doc-section-4"><i class="fas fa-cogs"></i> Công nghệ sử dụng</a></li>
+                    <li><a href="#doc-section-5"><i class="fas fa-project-diagram"></i> Kiến trúc hệ thống</a></li>
+                </ul>
+            </aside>
+
+            <main class="doc-main-content">
+                <section id="doc-section-1">
+                    <h2><i class="fas fa-code"></i> 1. Source Code</h2>
+                    <p>Mã nguồn của dự án được lưu trữ trên nền tảng GitHub. Bạn có thể truy cập tại đây:</p>
+                        <p>
+                            <a href="https://github.com/GiangSon-5/DeepSuggest_Elasticsearch"
+                            target="_blank"
+                            class="doc-link"
+                            style="font-size: 1.3em; font-weight: bold;">
+                                <i class="fab fa-github" style="font-size: 1.4em; vertical-align: middle;"></i>
+                                GitHub Repository
+                            </a>
+                        </p>
+                </section>
+                
+                <hr>
+                <section id="doc-section-2">
+                    <h2><i class="fas fa-users"></i> 2. Người thực hiện</h2>
+                    <p>Dự án được phát triển bởi nhóm sinh viên:</p>
+                    <ul>
+                        <li><strong>Giang Sơn</strong> - (MSSV) - Phụ trách...</li>
+                        <li><strong>Văn Nhi</strong> - (MSSV) - Phụ trách...</li>
+                    </ul>
+                </section>
+
+                <hr>
+
+                <section id="doc-section-3" class="usage-section">
+                    
+                    <h2><i class="fas fa-tasks"></i> 3. Cách sử dụng</h2>
+                    <p>Hệ thống hỗ trợ <strong>3 kiểu tìm kiếm chính</strong>:</p>
+
+                    <div class="usage-card">
+                        <div class="usage-item">
+                        <i class="fas fa-list"></i>
+                        <div>
+                            <strong>Tìm kiếm theo Category:</strong>
+                            <p>Chọn một mục trong dropdown (ví dụ: "Tivi") và bấm nút Tìm. Hệ thống sẽ liệt kê tất cả sản phẩm thuộc category đó.</p>
+                        </div>
+                        </div>
+
+                        <div class="usage-item">
+                        <i class="fas fa-key"></i>
+                        <div>
+                            <strong>Tìm kiếm theo Từ khóa:</strong>
+                            <p>Gõ một từ khóa (ví dụ: "Dell XPS") và bấm Tìm. Hệ thống sẽ hiển thị các sản phẩm có <em>khớp từ khóa</em> trong tên hoặc mô tả.</p>
+                        </div>
+                        </div>
+
+                        <div class="usage-item">
+                        <i class="fas fa-brain"></i>
+                        <div>
+                            <strong>Tìm kiếm Ngữ nghĩa (Semantic):</strong>
+                            <p>Gõ một cụm từ mô tả ý nghĩa (ví dụ: "máy tính mỏng nhẹ pin trâu") và bấm Tìm. Hệ thống sẽ hiển thị sản phẩm <em>khớp từ khóa</em> và các sản phẩm <em>liên quan ngữ nghĩa</em> (ví dụ: MacBook Air).</p>
+                        </div>
+                        </div>
+
+                        <div class="usage-item">
+                        <i class="fas fa-clone"></i>
+                        <div>
+                            <strong>Xem gợi ý tương tự:</strong>
+                            <p>Click "Chi tiết" để mở modal hiển thị 5 sản phẩm tương tự nhất dựa trên vector embedding.</p>
+                        </div>
+                        </div>
+                    </div>
+                </section>
+
+
+                <hr>
+
+                <section id="doc-section-4">
+                    <h2><i class="fas fa-cogs"></i> 4. Công nghệ sử dụng</h2>
+                    <div class="tech-stack">
+                        <div>
+                            <h3><i class="fas fa-server"></i> Backend</h3>
+                            <ul>
+                                <li><strong>Python 3.10:</strong> Ngôn ngữ lập trình chính.</li>
+                                <li><strong>FastAPI:</strong> Framework để xây dựng API hiệu năng cao.</li>
+                                <li><strong>Elasticsearch 8.x:</strong> Cỗ máy tìm kiếm (Search Engine).</li>
+                                <li><strong>Sentence-Transformers:</strong> Thư viện AI cho embedding.</li>
+                                <li><strong>Mô hình:</strong> `vietnamese-bi-encoder` (BKAI).</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3><i class="fas fa-desktop"></i> Frontend</h3>
+                            <ul>
+                                <li><strong>HTML5:</strong> Cấu trúc trang web.</li>
+                                <li><strong>CSS3:</strong> Thiết kế giao diện.</li>
+                                <li><strong>JavaScript (Vanilla):</strong> Xử lý logic phía client.</li>
+                                <li><strong>MicroModal.js:</strong> Thư viện hiển thị cửa sổ chi tiết.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3><i class="fab fa-docker"></i> Infrastructure</h3>
+                            <ul>
+                                <li><strong>Docker & Docker Compose:</strong> Đóng gói và chạy các dịch vụ (ES, Backend, Kibana).</li>
+                                <li><strong>Kibana:</strong> Giao diện quản lý và trực quan hóa dữ liệu trong Elasticsearch.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <hr>
+                
+                <section id="doc-section-5">
+                    <h2><i class="fas fa-project-diagram"></i> 5. Kiến trúc hệ thống</h2>
+                    <p>Hệ thống được thiết kế theo kiến trúc hướng dịch vụ (SOA) và triển khai hoàn toàn trên nền tảng Docker.</p>
+                    <div class="arch-flow-box">
+                    <h3><i class="fas fa-database"></i> Luồng Offline (Chuẩn bị dữ liệu)</h3>
+                    <div class="flow-container">
+                        <div class="flow-step">CSV/XLSX</div>
+                        <i class="fas fa-arrow-right"></i>
+                        <div class="flow-step">Python Script<br><small>Preprocess</small></div>
+                        <i class="fas fa-arrow-right"></i>
+                        <div class="flow-step">Python Script<br><small>Embedding<br>(Vietnamese-Bi-Encoder)</small></div>
+                        <i class="fas fa-arrow-right"></i>
+                        <div class="flow-step">Python Script<br><small>Nạp vào Elasticsearch</small></div>
+                    </div>
+                    </div>
+
+                    <div class="arch-flow-box">
+                    <h3><i class="fas fa-globe"></i> Luồng Online (Người dùng tìm kiếm)</h3>
+                    <div class="flow-container">
+                        <div class="flow-step">User<br><small>(Browser)</small></div>
+                        <i class="fas fa-arrow-right"></i>
+                        <div class="flow-step">JavaScript<br><small>Gọi API</small></div>
+                        <i class="fas fa-arrow-right"></i>
+                        <div class="flow-step">Backend<br><small>(FastAPI)</small></div>
+                        <i class="fas fa-arrow-right"></i>
+                        <div class="flow-step">Elasticsearch</div>
+                        <i class="fas fa-arrow-right"></i>
+                        <div class="flow-step">Frontend<br><small>Hiển thị kết quả</small></div>
+                    </div>
+                    </div>
+
+                    
+                    <div class="arch-diagram">
+                        <h3><i class="fas fa-diagram-project"></i> Mô phỏng luồng xử lý</h3>
+                        <div class="diagram-container">
+                            <img src="../imgs/flow.jpg" alt="System Architecture Flow" class="diagram-img">
+                            <p class="caption">Hình 5.1 - Mô phỏng luồng xử lý truy vấn trong hệ thống</p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <footer>
+            <div class="container"><p>Trang Hướng dẫn & Kiến trúc</p></div>
+        </footer>
+    </div>
+    <div id="product-modal" class="modal" aria-hidden="true">
+        <div class="modal-overlay" tabindex="-1" data-micromodal-close></div>
+        <div class="modal-container" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <header class="modal-header">
+                <h2 class="modal-title" id="modal-title">Chi tiết</h2>
+                <button class="modal-close" aria-label="Đóng" data-micromodal-close><i class="fas fa-times"></i></button>
+            </header>
+            <main class="modal-content" id="modal-content-main">
+                <div class="modal-product-details"><p>Đang tải...</p></div>
+                <aside class="modal-recommendations">
+                    <h3>Sản phẩm tương tự</h3>
+                    <div id="modal-recommendation-list"><p>Đang tải...</p></div>
+                </aside>
+            </main>
+            <footer class="modal-footer">
+                <button class="modal-btn" data-micromodal-close aria-label="Đóng">Đóng</button>
+            </footer>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+    <script src="app.js"></script>
+
+</body>
+</html>
